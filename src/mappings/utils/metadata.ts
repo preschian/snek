@@ -7,7 +7,11 @@ export const fetchMetadata = async <T>(metadata: string): Promise<T> => {
     if (!metadata) {
       return ensure<T>({});
     }
-    return await $obtain<T>(metadata);
+
+    const url = new URL(metadata);
+    const newMetadata = `https://r2.infura-ipfs.io/${url.pathname}`;
+
+    return await $obtain<T>(newMetadata);
   } catch (e) {
     logger.warn('IPFS Err', e);
   }
