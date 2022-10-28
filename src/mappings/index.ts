@@ -75,9 +75,9 @@ async function handleMetadata(
 }
 
 export async function handleCollectionCreate(context: Context): Promise<void> {
-  logger.pending(`[COLECTTION++]: ${context.block.height}`);
+  context.log.debug(`[COLECTTION++]: ${context.block.height}`);
   const event = unwrap(context, getCreateCollectionEvent);
-  logger.debug(`collection: ${JSON.stringify(event, null, 2)}`);
+  context.log.debug(`collection: ${JSON.stringify(event, null, 2)}`);
   const final = await getOrCreate<CE>(context.store, CE, event.id, {});
   plsBe(remintable, final);
 
@@ -93,7 +93,7 @@ export async function handleCollectionCreate(context: Context): Promise<void> {
   final.supply = 0;
   final.type = event.type as CollectionType; // unsafe
 
-  logger.debug(`metadata: ${final.metadata}`);
+  context.log.debug(`metadata: ${final.metadata}`);
 
   if (final.metadata) {
     const metadata = await handleMetadata(final.metadata, context.store);
@@ -101,7 +101,7 @@ export async function handleCollectionCreate(context: Context): Promise<void> {
     final.name = metadata?.name;
   }
 
-  logger.success(`[COLLECTION] ${final.id}`);
+  context.log.info(`[COLLECTION] ${final.id}`);
   await context.store.save(final);
   await createCollectionEvent(final, Interaction.MINT, event, '', context.store);
 }
