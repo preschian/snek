@@ -26,6 +26,7 @@ WHERE
     e.interaction = $1
     AND ne.burned = false
     AND ce.name IS NOT NULL
+    AND me.image IS NOT NULL
 GROUP BY ne.id, me.id, e.current_owner, me.image, ce.name
 ORDER BY MAX(e.timestamp) DESC
 LIMIT $2 OFFSET $3`
