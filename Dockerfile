@@ -7,6 +7,7 @@ FROM node-with-gyp AS builder
 WORKDIR /squid
 ADD package.json .
 ADD package-lock.json .
+ADD patches .
 RUN npm ci
 ADD tsconfig.json .
 ADD src src
@@ -16,6 +17,7 @@ FROM node-with-gyp AS deps
 WORKDIR /squid
 ADD package.json .
 ADD package-lock.json .
+ADD patches .
 RUN npm ci --production
 
 FROM node AS squid
