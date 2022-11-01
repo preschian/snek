@@ -12,11 +12,10 @@
     "query-node:start": "squid-graphql-server",
     "lint": "npm run lint:prod -- --fix",
     "lint:prod": "eslint . --ext .ts --ignore-path .gitignore --max-warnings 0",
-    "test": "vitest --run --dir tests",
-    "postinstall": "patch-package"
+    "test": "vitest --run --dir tests"
   },
   "dependencies": {
-    "@kodadot1/minipfs": "^0.1.1-rc.0",
+    "@kodadot1/minipfs": "^0.1.1-rc.1",
     "@subsquid/archive-registry": "1.0.14",
     "@subsquid/cli": "^0.7.1",
     "@subsquid/graphql-server": "^3.2.0",
@@ -28,7 +27,6 @@
     "dotenv": "^16.0.2",
     "md5": "^2.3.0",
     "nanoid": "3.3.4",
-    "patch-package": "^6.5.0",
     "pg": "^8.8.0",
     "signale": "^1.4.0",
     "type-graphql": "^1.2.0-rc.1",
